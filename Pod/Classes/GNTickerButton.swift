@@ -8,8 +8,8 @@
 
 import UIKit
 
-@objc public protocol CaptureButtonRotationDelegate {
-    func captureButtonTickerRotated(captureButton button:GNTickerButton)
+@objc public protocol GNTickerButtonRotationDelegate {
+    func tickerButtonTickerRotated(tickerButton button:GNTickerButton)
 }
 
 @IBDesignable public class GNTickerButton : UIButton {
@@ -59,7 +59,7 @@ import UIKit
     
     private var desiredRotations:Int?
     
-    weak var delegate : CaptureButtonRotationDelegate?
+    weak var delegate : GNTickerButtonRotationDelegate?
     
     //MARK: - Initiliazation
     
@@ -198,7 +198,7 @@ import UIKit
                 if (rotationBlock != nil) {
                     rotationBlock!()
                 } else {
-                    self.delegate?.captureButtonTickerRotated(captureButton: self)
+                    self.delegate?.tickerButtonTickerRotated(tickerButton: self)
                 }
                 if (repeats > 0) {
                     self.rotateTickerWithDuration(duration, rotations: --repeats, rotationBlock: rotationBlock)
