@@ -4,6 +4,8 @@
 [![License](https://img.shields.io/cocoapods/l/GNTickerButton.svg?style=flat)](http://cocoapods.org/pods/GNTickerButton)
 [![Platform](https://img.shields.io/cocoapods/p/GNTickerButton.svg?style=flat)](http://cocoapods.org/pods/GNTickerButton)
 
+![](https://github.com/gonzalonunez/GNTickerButton/blob/master/Pod/Assets/GNTickerButton-Gif.gif)
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
