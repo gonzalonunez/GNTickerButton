@@ -6,22 +6,22 @@
 //  Copyright (c) 2015 Gonzalo Nunez. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 @objc public protocol CaptureButtonRotationDelegate {
-     func captureButtonTickerRotated(captureButton button:GNTickerButton)
+    func captureButtonTickerRotated(captureButton button:GNTickerButton)
 }
 
 @IBDesignable public class GNTickerButton : UIButton {
     
-    static let kInnerRingLineWidth:CGFloat = 1
-    static let kOuterRingLineWidth:CGFloat = 4
-    static let kOutterInnerRingSpacing:CGFloat = 6
-    static let kTearDropRadius:CGFloat = 5
+    static private let kInnerRingLineWidth:CGFloat = 1
+    static private let kOuterRingLineWidth:CGFloat = 4
+    static private let kOutterInnerRingSpacing:CGFloat = 6
+    static private let kTearDropRadius:CGFloat = 5
     
-    static let kTickerRotationAnimationKey = "transform.rotation"
-
+    static private let kTickerRotationAnimationKey = "transform.rotation"
+    static private let kRingProgressAnimationKey = "strokeEnd"
+    
     @IBInspectable public var fillColor = UIColor(red: 251/255, green: 77/255, blue: 31/255, alpha: 1) {
         didSet {
             setNeedsDisplay()
@@ -40,9 +40,9 @@ import UIKit
         }
     }
     
-    public var shouldShowTicker = true {
+    public var shouldShowRingProgress = true {
         didSet {
-            tickerLayer.hidden = !shouldShowTicker
+            ringLayer.hidden = !shouldShowRingProgress
         }
     }
     
@@ -55,6 +55,9 @@ import UIKit
     private(set) var tickerIsSpinning = false
     
     private var tickerLayer = CAShapeLayer()
+    private var ringLayer = CAShapeLayer()
+    
+    private var desiredRotations:Int?
     
     weak var delegate : CaptureButtonRotationDelegate?
     
@@ -106,6 +109,31 @@ import UIKit
         layer.addSublayer(tickerLayer)
     }
     
+    private func setUpRing() {
+        ringLayer.removeFromSuperlayer()
+        
+        let rect = layer.bounds
+        let outerRadius = outerRadiusInRect(rect)
+        let centerX = CGRectGetMidX(rect)
+        let centerY = CGRectGetMidY(rect)
+        
+        let ringPath = CGPathCreateMutable()
+        CGPathAddArc(ringPath, nil, centerX, centerY, outerRadius, CGFloat(-M_PI_2), CGFloat(M_PI_2*3), false)
+        
+        ringLayer = CAShapeLayer()
+        
+        ringLayer.path = ringPath
+        ringLayer.position = CGPoint(x: CGRectGetMidX(layer.bounds), y: CGRectGetMidY(layer.bounds))
+        ringLayer.bounds = CGPathGetBoundingBox(ringPath)
+        ringLayer.fillColor = UIColor.clearColor().CGColor
+        ringLayer.strokeColor = ringColor.CGColor
+        
+        ringLayer.lineWidth = GNTickerButton.kOuterRingLineWidth
+        ringLayer.strokeEnd = 0
+        
+        layer.addSublayer(ringLayer)
+    }
+    
     private func addTargets() {
         addTarget(self, action: "touchDown", forControlEvents: .TouchDown)
         addTarget(self, action: "touchUpInside", forControlEvents: .TouchUpInside)
@@ -126,8 +154,38 @@ import UIKit
     
     //MARK: Public
     
-    public func rotateTickerWithDuration(duration:CFTimeInterval, repeatCount:Int = 1, rotationBlock: (Void -> Void)?) {
+    public func rotateTickerWithDuration(duration:CFTimeInterval, rotations repeatCount:Int = 1, rotationBlock: (Void -> Void)?) {
+        if (desiredRotations == nil) {
+            _rotateTickerWithDuration(duration, rotations: repeatCount, shouldSetDesiredRotationCount: true, rotationBlock: rotationBlock)
+        } else {
+            _rotateTickerWithDuration(duration, rotations: repeatCount, shouldSetDesiredRotationCount: false, rotationBlock: rotationBlock)
+        }
+    }
+    
+    public func stopRotatingTicker() {
+        tickerLayer.removeAnimationForKey(GNTickerButton.kTickerRotationAnimationKey)
+    }
+    
+    public func clearRingProgress() {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock() {
+            CATransaction.begin()
+            self.ringLayer.strokeStart = 0
+            self.ringLayer.strokeEnd = 0
+            CATransaction.commit()
+        }
+        ringLayer.strokeStart = 1
+        CATransaction.commit()
+    }
+    
+    //MARK: Private
+    
+    private func _rotateTickerWithDuration(duration:CFTimeInterval, rotations repeatCount:Int = 1, shouldSetDesiredRotationCount:Bool = true, rotationBlock: (Void -> Void)?) {
         tickerIsSpinning = true
+        
+        if (shouldSetDesiredRotationCount) {
+            desiredRotations = repeatCount
+        }
         
         let rotationAnimation = CABasicAnimation(keyPath: GNTickerButton.kTickerRotationAnimationKey)
         rotationAnimation.duration = duration
@@ -135,28 +193,47 @@ import UIKit
         rotationAnimation.toValue = 2*M_PI
         rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         
-        CATransaction.begin()
         var repeats = repeatCount
+        
+        CATransaction.begin()
         CATransaction.setCompletionBlock() {
             dispatch_async(dispatch_get_main_queue()) {
+                self.updateRingProgress(repeatCount, animated: true)
                 if (rotationBlock != nil) {
                     rotationBlock!()
                 } else {
                     self.delegate?.captureButtonTickerRotated(captureButton: self)
                 }
                 if (repeats > 0) {
-                    self.rotateTickerWithDuration(duration, repeatCount: --repeats, rotationBlock : rotationBlock)
+                    self._rotateTickerWithDuration(duration, rotations: --repeats, shouldSetDesiredRotationCount: false, rotationBlock: rotationBlock)
                 } else {
+                    self.desiredRotations = nil
                     self.tickerIsSpinning = false
                 }
             }
         }
+        
         tickerLayer.addAnimation(rotationAnimation, forKey: GNTickerButton.kTickerRotationAnimationKey)
         CATransaction.commit()
     }
     
-    public func stopRotatingTicker() {
-        tickerLayer.removeAnimationForKey(GNTickerButton.kTickerRotationAnimationKey)
+    private func updateRingProgress(rotationsLeft:Int, animated:Bool) {
+        var strokeEnd = 0 as CGFloat
+        if (desiredRotations != nil) {
+            strokeEnd = CGFloat((desiredRotations! - rotationsLeft)) / CGFloat(desiredRotations!)
+        }
+        
+        let fillAnimation = CABasicAnimation(keyPath: GNTickerButton.kRingProgressAnimationKey)
+        fillAnimation.duration = animated ? 0.15 : 0
+        fillAnimation.fromValue = ringLayer.strokeEnd
+        fillAnimation.toValue = strokeEnd
+        fillAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        ringLayer.strokeEnd = strokeEnd
+        
+        CATransaction.begin()
+        ringLayer.addAnimation(fillAnimation, forKey: GNTickerButton.kRingProgressAnimationKey)
+        CATransaction.commit()
     }
     
     //MARK: - Drawing
@@ -181,11 +258,6 @@ import UIKit
         let centerX = CGRectGetMidX(rect)
         let centerY = CGRectGetMidY(rect)
         
-        // Outer Ring
-        CGContextSetLineWidth(context, GNTickerButton.kOuterRingLineWidth)
-        addCircleInContext(context, centerX, centerY, outerRadius)
-        CGContextStrokePath(context)
-        
         // Inner Circle
         addCircleInContext(context, centerX, centerY, innerRadius)
         CGContextFillPath(context)
@@ -199,6 +271,7 @@ import UIKit
     override public func drawLayer(layer: CALayer!, inContext ctx: CGContext!) {
         super.drawLayer(layer, inContext: ctx)
         setUpTicker()
+        setUpRing()
     }
     
     //MARK - Helpers
