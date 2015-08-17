@@ -1,0 +1,14 @@
+PODS:
+  - GNTickerButton (0.1.0)
+
+DEPENDENCIES:
+  - GNTickerButton (from `../`)
+
+EXTERNAL SOURCES:
+  GNTickerButton:
+    :path: ../
+
+SPEC CHECKSUMS:
+  GNTickerButton: bd260ec2359bb71de48018390b8ed995927cfa7d
+
+COCOAPODS: 0.38.2

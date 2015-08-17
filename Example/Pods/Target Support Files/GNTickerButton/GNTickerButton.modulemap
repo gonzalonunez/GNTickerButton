@@ -1,0 +1,6 @@
+framework module GNTickerButton {
+  umbrella header "GNTickerButton-umbrella.h"
+
+  export *
+  module * { export * }
+}

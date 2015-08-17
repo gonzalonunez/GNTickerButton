@@ -1,0 +1,6 @@
+framework module Pods_GNTickerButton_Tests {
+  umbrella header "Pods-GNTickerButton_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
