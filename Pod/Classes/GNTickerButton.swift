@@ -155,11 +155,7 @@ import UIKit
     //MARK: Public
     
     public func rotateTickerWithDuration(duration:CFTimeInterval, rotations repeatCount:Int = 1, rotationBlock: (Void -> Void)?) {
-        if (desiredRotations == nil) {
-            _rotateTickerWithDuration(duration, rotations: repeatCount, shouldSetDesiredRotationCount: true, rotationBlock: rotationBlock)
-        } else {
-            _rotateTickerWithDuration(duration, rotations: repeatCount, shouldSetDesiredRotationCount: false, rotationBlock: rotationBlock)
-        }
+        _rotateTickerWithDuration(duration, rotations: repeatCount, shouldSetDesiredRotationCount: desiredRotations == nil, rotationBlock: rotationBlock)
     }
     
     public func stopRotatingTicker() {
@@ -205,7 +201,7 @@ import UIKit
                     self.delegate?.captureButtonTickerRotated(captureButton: self)
                 }
                 if (repeats > 0) {
-                    self._rotateTickerWithDuration(duration, rotations: --repeats, shouldSetDesiredRotationCount: false, rotationBlock: rotationBlock)
+                    self.rotateTickerWithDuration(duration, rotations: --repeats, rotationBlock: rotationBlock)
                 } else {
                     self.desiredRotations = nil
                     self.tickerIsSpinning = false
