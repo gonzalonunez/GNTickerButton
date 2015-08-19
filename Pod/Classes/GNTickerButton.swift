@@ -22,6 +22,8 @@ import UIKit
     static private let kTickerRotationAnimationKey = "transform.rotation"
     static private let kRingProgressAnimationKey = "strokeEnd"
     
+    static private let kRingProgressAnimationDuration = 0.15
+    
     @IBInspectable public var fillColor = UIColor(red: 251/255, green: 77/255, blue: 31/255, alpha: 1) {
         didSet {
             setNeedsDisplay()
@@ -93,8 +95,6 @@ import UIKit
         
         let tearDropHeight = innerRadius - padding
         
-        tickerLayer = CAShapeLayer()
-        
         let boundingBox = CGPathGetBoundingBox(path)
         let height = CGRectGetHeight(boundingBox)
         let anchorY = 1 - (height - tearDropHeight)/height
@@ -119,8 +119,6 @@ import UIKit
         
         let ringPath = CGPathCreateMutable()
         CGPathAddArc(ringPath, nil, centerX, centerY, outerRadius, CGFloat(-M_PI_2), CGFloat(M_PI_2*3), false)
-        
-        ringLayer = CAShapeLayer()
         
         ringLayer.path = ringPath
         ringLayer.position = CGPoint(x: CGRectGetMidX(layer.bounds), y: CGRectGetMidY(layer.bounds))
@@ -220,7 +218,7 @@ import UIKit
         }
         
         let fillAnimation = CABasicAnimation(keyPath: GNTickerButton.kRingProgressAnimationKey)
-        fillAnimation.duration = animated ? 0.15 : 0
+        fillAnimation.duration = animated ? GNTickerButton.kRingProgressAnimationDuration : 0
         fillAnimation.fromValue = ringLayer.strokeEnd
         fillAnimation.toValue = strokeEnd
         fillAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
