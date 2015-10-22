@@ -13,7 +13,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 Using GNTickerButton is very easy. Rotating the ticker is as easy as calling one function:
 
 ```swift
-public func rotateTickerWithDuration(duration:CFTimeInterval, rotations repeatCount:Int = 1, rotationBlock: (Void -> Void)?) {
+public func rotateTickerWithDuration(duration:CFTimeInterval, rotations repeatCount:Int = 1, rotationBlock: (Void -> Void)?)
 ```
 
 The rotationBlock gets called everytime the ticker rotates completely. Keep in mind you can choose to pass nil into here and set yourself as the delegate of the GNTickerButton instead. For this, you'll need to conform to GNTickerButtonRotationDelegate.
