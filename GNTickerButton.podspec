@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "GNTickerButton"
-  s.version          = "0.1.2"
+  s.version          = "0.1.3"
   s.summary          = "Inspired by the Layout app by Instagram, this is a UIButton subclass with a ticker that spins around as desired."
 
   s.homepage         = "https://github.com/gonzalonunez/GNTickerButton"
