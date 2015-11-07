@@ -65,7 +65,7 @@ import UIKit
     
     //MARK: - Initiliazation
     
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         addTargets()
     }
@@ -239,7 +239,9 @@ import UIKit
             CGContextAddArc(context, centerX, centerY, radius, CGFloat(0), CGFloat(2*M_PI), 0)
         }
         
-        let context = UIGraphicsGetCurrentContext()
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
         
         let color = isPressed ? fillColor.colorWithAlphaComponent(0.5) : fillColor
         CGContextSetFillColorWithColor(context, color.CGColor)
@@ -253,16 +255,16 @@ import UIKit
         let centerY = CGRectGetMidY(rect)
         
         // Inner Circle
-        addCircleInContext(context, centerX, centerY, innerRadius)
+        addCircleInContext(context, centerX: centerX, centerY: centerY, radius: innerRadius)
         CGContextFillPath(context)
         
         // Inner Ring
         CGContextSetLineWidth(context, GNTickerButton.kInnerRingLineWidth)
-        addCircleInContext(context, centerX, centerY, innerRadius)
+        addCircleInContext(context, centerX: centerX, centerY: centerY, radius: innerRadius)
         CGContextStrokePath(context)
     }
     
-    override public func drawLayer(layer: CALayer!, inContext ctx: CGContext!) {
+    override public func drawLayer(layer: CALayer, inContext ctx: CGContext) {
         super.drawLayer(layer, inContext: ctx)
         setUpTicker()
         setUpRing()
