@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "GNTickerButton"
-  s.version          = "0.1.4"
+  s.version          = "0.1.5"
   s.summary          = "Inspired by the Layout app by Instagram, this is a UIButton subclass with a ticker that spins around as desired."
 
   s.homepage         = "https://github.com/gonzalonunez/GNTickerButton"
@@ -21,9 +21,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'GNTickerButton' => ['Pod/Assets/*.png']
-  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit'
