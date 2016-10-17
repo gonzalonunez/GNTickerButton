@@ -12,19 +12,11 @@
 		757D252802022719D96F4DD3049328C2 /* Pods-GNTickerButton_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 350EAA65C549205E33FCF16FA2B3871F /* Pods-GNTickerButton_Tests-dummy.m */; };
 		7B7F12190922F42DDECAD8AFE7661D41 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB61BBF901E2D11634C806471F4F4A5 /* Foundation.framework */; };
 		9FB775F31B812BEF00C5053C /* GNTickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB775F21B812BEF00C5053C /* GNTickerButton.swift */; };
-		C2C11F9A95EFC0E99FEEC0ACD399E7BE /* GNTickerButton.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A3CE6582538994C1914ED7907E08E76A /* GNTickerButton.bundle */; };
 		C982D9C432C0D530E05167EF443D6EDA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDB61BBF901E2D11634C806471F4F4A5 /* Foundation.framework */; };
 		F0194A2A06A9500094943560AC53F704 /* GNTickerButton-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DB2AF6BBFDAEC775286E55FFB6830C01 /* GNTickerButton-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		35E5479F22F8A73C4080CCC0BBD82859 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C8839BFA0C2078BD02549EA3E83BBAF2;
-			remoteInfo = "GNTickerButton-GNTickerButton";
-		};
 		BD8D6F891FD5DF4DB239A5DF0A74B658 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -48,7 +40,6 @@
 		86677FB0EA41CE5B22486B7592E30325 /* Pods-GNTickerButton_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GNTickerButton_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		9EAE24645805E42FE25511601696374E /* Pods-GNTickerButton_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GNTickerButton_Tests-resources.sh"; sourceTree = "<group>"; };
 		9FB775F21B812BEF00C5053C /* GNTickerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GNTickerButton.swift; sourceTree = "<group>"; };
-		A3CE6582538994C1914ED7907E08E76A /* GNTickerButton.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GNTickerButton.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C7DB6DB4688F15ECA4B6B8833CBF7D7F /* Pods-GNTickerButton_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-GNTickerButton_Tests.modulemap"; sourceTree = "<group>"; };
 		CBBEDAD95CD60010D017CC6136765C26 /* Pods-GNTickerButton_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GNTickerButton_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -66,13 +57,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C982D9C432C0D530E05167EF443D6EDA /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AA441C4AD757C49A47BFCAFACCE35F0B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,7 +176,6 @@
 		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A3CE6582538994C1914ED7907E08E76A /* GNTickerButton.bundle */,
 				7D94B1EED69AB19FB2EAE50DE9B56C0D /* GNTickerButton.framework */,
 				5556EB0E31BF5703126FB35E48F175F2 /* Pods_GNTickerButton_Tests.framework */,
 			);
@@ -233,7 +216,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				15F9AB02C7E5FB2C9BDF3629ED29366D /* PBXTargetDependency */,
 			);
 			name = GNTickerButton;
 			productName = GNTickerButton;
@@ -258,23 +240,6 @@
 			productReference = 5556EB0E31BF5703126FB35E48F175F2 /* Pods_GNTickerButton_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		C8839BFA0C2078BD02549EA3E83BBAF2 /* GNTickerButton-GNTickerButton */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D0E49547F6AA6735E5978D083B427D88 /* Build configuration list for PBXNativeTarget "GNTickerButton-GNTickerButton" */;
-			buildPhases = (
-				CBAD1F6F9F390558F59EC667631F1FC0 /* Sources */,
-				AA441C4AD757C49A47BFCAFACCE35F0B /* Frameworks */,
-				383C051D4EEEA4C2EC70DEE9FBBF8DA4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "GNTickerButton-GNTickerButton";
-			productName = "GNTickerButton-GNTickerButton";
-			productReference = A3CE6582538994C1914ED7907E08E76A /* GNTickerButton.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -284,6 +249,11 @@
 				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					38546EB35394CA941CC1EC05282CA754 = {
+						LastSwiftMigration = 0800;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -298,7 +268,6 @@
 			projectRoot = "";
 			targets = (
 				38546EB35394CA941CC1EC05282CA754 /* GNTickerButton */,
-				C8839BFA0C2078BD02549EA3E83BBAF2 /* GNTickerButton-GNTickerButton */,
 				AF0114A7B0B0DB89BE5870E127E035F9 /* Pods-GNTickerButton_Tests */,
 			);
 		};
@@ -306,14 +275,6 @@
 
 /* Begin PBXResourcesBuildPhase section */
 		3774BF9784D0B5B648B43927FAC7E26C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C2C11F9A95EFC0E99FEEC0ACD399E7BE /* GNTickerButton.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		383C051D4EEEA4C2EC70DEE9FBBF8DA4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -332,13 +293,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CBAD1F6F9F390558F59EC667631F1FC0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CBEC00639F35F1CCAB72337C061FF974 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -350,12 +304,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		15F9AB02C7E5FB2C9BDF3629ED29366D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "GNTickerButton-GNTickerButton";
-			target = C8839BFA0C2078BD02549EA3E83BBAF2 /* GNTickerButton-GNTickerButton */;
-			targetProxy = 35E5479F22F8A73C4080CCC0BBD82859 /* PBXContainerItemProxy */;
-		};
 		99D1A3DE8D4AD3B3F081DF6DBDCFAE3E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GNTickerButton;
@@ -365,18 +313,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		06AC7C59EADF0CB5BBDAE07EAC2FF59A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EDA203B0EF0A415C58C199D1B74890D0 /* GNTickerButton-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = GNTickerButton;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
 		10DE1947DAC0ED28F6C0A9F9BD75D546 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -408,18 +344,6 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		4080DE01CC8BCF791E872A9937E8F36C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EDA203B0EF0A415C58C199D1B74890D0 /* GNTickerButton-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = GNTickerButton;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -512,6 +436,7 @@
 				PRODUCT_NAME = GNTickerButton;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -570,6 +495,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -593,15 +519,6 @@
 			buildConfigurations = (
 				EB2D4F9E38FACF29264FEBCB2223EB85 /* Debug */,
 				DAA5E851BDBE0F7C40FC9D978EC003AB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D0E49547F6AA6735E5978D083B427D88 /* Build configuration list for PBXNativeTarget "GNTickerButton-GNTickerButton" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				06AC7C59EADF0CB5BBDAE07EAC2FF59A /* Debug */,
-				4080DE01CC8BCF791E872A9937E8F36C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
